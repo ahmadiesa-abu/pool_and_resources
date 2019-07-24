@@ -1,6 +1,10 @@
 # pool_and_resources
 
-first to configure the databse : 
+configure python for flask :
+
+pip install flask
+
+configure the databse : 
 
 we have to install python packages to use postgresql database with flask using the following command :
 
