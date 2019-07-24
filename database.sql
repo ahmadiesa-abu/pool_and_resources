@@ -5,6 +5,7 @@ grant all privileges on database pools to pool_editor;
 psql -U pool_editor pools
 create table pool(id varchar(255) PRIMARY KEY,name varchar(255));
 create table resource(pool_id varchar(255),id varchar(255) PRIMARY KEY,ip_address varchar(255),status varchar(255));
+alter table resource add constraint fk_pool_resource foreign key (pool_id) references pool(id);
 
 insert into pool values ('fg34sc-re34-12tg-dv34hn12za56','unit_testing_example')
 insert into resource values('fg34sc-re34-12tg-dv34hn12za56','i81YoErB-qNUn-OWUi-qIzGavZ9zORt','1.1.1.1','RELEASED');
