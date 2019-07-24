@@ -1,11 +1,13 @@
 # pool_and_resources
 
-configure python for flask :
+configure python for flask and database :
 
-pip install flask
+pip install flask flask_api flask_sqlalchemy psycopg2
 
-configure the databse : 
+configure the database using database.sql file content and psql command
 
-we have to install python packages to use postgresql database with flask using the following command :
+python manage.py db init
+python manage.py db migrate
+python manage.py db upgrade
 
-pip install flask-sqlalchemy psycopg2
+then to run the application use the following : python manage.py runserver
