@@ -10,4 +10,7 @@ python manage.py db init
 python manage.py db migrate
 python manage.py db upgrade
 ```
-then to run the application use the following : python manage.py runserver
+then to run the application use the following : 
+```
+python manage.py runserver
+```
