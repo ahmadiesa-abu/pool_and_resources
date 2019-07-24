@@ -5,8 +5,8 @@ class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = 'jesus123'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:jesus123@localhost:5432/pools'
+    SECRET_KEY = 'poolEdit12'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://pool_editor:poolEdit12@localhost:5432/pools'
 
 
 class ProductionConfig(Config):
