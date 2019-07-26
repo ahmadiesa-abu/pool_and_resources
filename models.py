@@ -23,7 +23,7 @@ class Pool(db.Model):
 class Resource(db.Model):
     __tablename__ = 'resource'
 	
-    pool_id = db.Column(db.String(),db.ForeignKey('Pool.id'),
+    pool_id = db.Column(db.String(),db.ForeignKey('pool.id'),
         nullable=False)
     id = db.Column(db.String, primary_key=True)
     ip_address = db.Column(db.String())
