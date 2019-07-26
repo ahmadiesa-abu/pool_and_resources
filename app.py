@@ -55,7 +55,7 @@ def add_pool(id):
 
             return make_response(request.json, 201)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route("/api/pools", methods=['GET'])
@@ -76,7 +76,7 @@ def get_pools():
             all_pools.append(p)
         return make_response(jsonify({'items': all_pools}), 200)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route("/api/pools/<string:id>", methods=['GET'])
@@ -96,7 +96,7 @@ def get_pool_by_id(id):
         p['resources'] = p_resources
         return make_response(jsonify(p), 200)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route("/api/pools/<string:id>", methods=['DELETE'])
@@ -116,7 +116,7 @@ def delete_pool_by_id(id):
             db.session.commit()
             return make_response({}, 204)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route('/api/pools/<string:id>/allocate', methods=['PUT'])
@@ -140,7 +140,7 @@ def allocate_resource(id):
             p_resource['status'] = resource.status
             return make_response(jsonify(p_resource), 200)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route('/api/pools/<string:id>/release', methods=['PUT'])
@@ -164,7 +164,7 @@ def release_resource(id):
             p_resource['status'] = resource.status
             return make_response(jsonify(p_resource), 200)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route('/api/pools/<string:id>/resource/add', methods=['POST'])
@@ -189,7 +189,7 @@ def add_resource(id):
             db.session.commit()
             return make_response(jsonify(p_resource), 200)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route("/api/pools/<string:id>/resource/remove/<string:resource_id>", methods=['DELETE'])
@@ -209,7 +209,7 @@ def delete_resource_by_id(id, resource_id):
             db.session.commit()
             return make_response({}, 204)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 @app.route("/api/pools/<string:id>/resource/<string:resource_id>", methods=['GET'])
@@ -233,7 +233,7 @@ def get_resource_by_id(id, resource_id):
                 p_resource['status'] = resource.status
                 return make_response(jsonify(p_resource), 200)
     except Exception as e:
-        return(str(e))
+        return make_response({},500)
 
 
 if __name__ == '__main__':
