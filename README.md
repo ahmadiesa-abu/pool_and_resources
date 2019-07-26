@@ -3,7 +3,7 @@
 configure python for flask and database :
 
 ```
-pip install flask flask_api flask_sqlalchemy psycopg2 flask_script flask_migrate
+pip install -r requirements.txt
 ```
 
 configure the database using database.sql file content then do the manage steps:
