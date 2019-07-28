@@ -1,27 +1,11 @@
-# pool_and_resources
+to configure python for flask and database :
 
-configure python for flask and database :
-
-```
 pip install -r requirements.txt
-```
 
-configure the database using database.sql file content then do the manage steps:
+to run unit tests [it will create a database and tear it down]:
 
-```
-python manage.py db init
-python manage.py db migrate
-python manage.py db upgrade
-```
+python manage.py test
 
-to run unit tests that assumes that database already set and everything is ready : 
+to run the project [the project checks if database is configured if not it will configure it before running]:
 
-```
-python tests.py
-```
-
-then to run the application use the following : 
-```
-python manage.py runserver
-```
-
+python manage.py run
