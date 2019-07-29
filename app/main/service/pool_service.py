@@ -24,9 +24,13 @@ def add_pool(id,request):
             result = {'error': 'Resource with same id already exists'}
             return make_response(jsonify(result), 409)
         else:
-            if not request.json:
-                result = {'error': 'check your request inputs'}
-                return make_response(jsonify(result),500)
+            if request.data:
+                if not request.is_json:
+                    result = {'error': 'API input must be of json content type'}
+                    return make_response(jsonify(result),500)
+                if not request.json:
+					result = {'error': 'check your request inputs'}
+					return make_response(jsonify(result),500)
             name = request.json['name']
             resources = request.json['resources']
             pool = Pool(
@@ -46,7 +50,7 @@ def add_pool(id,request):
 				
             return make_response(request.json, 201)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 
 def get_pools():
@@ -66,7 +70,7 @@ def get_pools():
             all_pools.append(p)
         return make_response(jsonify({'items': all_pools}), 200)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 		
 def get_pool_by_id(id):
@@ -88,7 +92,7 @@ def get_pool_by_id(id):
         p['resources'] = p_resources
         return make_response(jsonify(p), 200)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 
 def delete_pool_by_id(id):
@@ -107,6 +111,5 @@ def delete_pool_by_id(id):
 			
             return make_response({}, 204)
     except Exception as e:
-        print (e)
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)

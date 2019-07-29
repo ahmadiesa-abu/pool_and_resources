@@ -1,5 +1,6 @@
 import uuid
 import datetime
+import traceback
 
 from app.main import db
 from app.main.model.Pool import Pool
@@ -24,9 +25,13 @@ def allocate_resource(id,request):
             result = {'error': 'Resource is not found'}
             return make_response(jsonify(result), 404)
         else:
-            if not request.json:
-                result = {'error': 'check your request inputs'}
-                return make_response(jsonify(result),500)
+            if request.data:
+                if not request.is_json:
+                    result = {'error': 'API input must be of json content type'}
+                    return make_response(jsonify(result),500)
+                if not request.json:
+					result = {'error': 'check your request inputs'}
+					return make_response(jsonify(result),500)
             resource_id = request.json['id']
             resources = pool.resources
             if not resources:
@@ -34,6 +39,9 @@ def allocate_resource(id,request):
                 return make_response(jsonify(result), 404)
             for resource in resources:
                 if resource.id == resource_id:
+                    if resource.status == 'ALLOCATED':
+                        result = {'error': 'Resource is already allocated'}
+                        return make_response(jsonify(result), 409)
                     resource.status = 'ALLOCATED'
                     db.session.commit()
                     p_resource = {}
@@ -44,7 +52,7 @@ def allocate_resource(id,request):
             result = {'error': 'Resource is not found'}
             return make_response(jsonify(result), 404)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 
 def release_resource(id,request):
@@ -54,9 +62,13 @@ def release_resource(id,request):
             result = {'error': 'Resource is not found'}
             return make_response(jsonify(result), 404)
         else:
-            if not request.json:
-                result = {'error': 'check your request inputs'}
-                return make_response(jsonify(result),500)
+            if request.data:
+                if not request.is_json:
+                    result = {'error': 'API input must be of json content type'}
+                    return make_response(jsonify(result),500)
+                if not request.json:
+					result = {'error': 'check your request inputs'}
+					return make_response(jsonify(result),500)
             resource_id = request.json['id']
             resources = pool.resources
             if not resources:
@@ -74,7 +86,7 @@ def release_resource(id,request):
             result = {'error': 'Resource is not found'}
             return make_response(jsonify(result), 404)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 
 def add_resource(id,request):
@@ -84,9 +96,13 @@ def add_resource(id,request):
             result = {'error': 'Resource is not found'}
             return make_response(jsonify(result), 404)
         else:
-            if not request.json:
-                result = {'error': 'check your request inputs'}
-                return make_response(jsonify(result),500)
+            if request.data:
+                if not request.is_json:
+                    result = {'error': 'API input must be of json content type'}
+                    return make_response(jsonify(result),500)
+                if not request.json:
+					result = {'error': 'check your request inputs'}
+					return make_response(jsonify(result),500)
             ip_address = request.json['ip_address']
             p_resource = {}
             p_resource['id'] = uuid.uuid4()
@@ -102,7 +118,7 @@ def add_resource(id,request):
             
             return make_response(jsonify(p_resource), 200)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 
 def delete_resource_by_id(id, resource_id):
@@ -123,7 +139,7 @@ def delete_resource_by_id(id, resource_id):
             result = {'error': 'Resource is not found'}
             return make_response(jsonify(result), 404)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 		
 def get_resource_by_id(id, resource_id):
@@ -150,6 +166,6 @@ def get_resource_by_id(id, resource_id):
         result = {'error': 'Resource is not found'}
         return make_response(jsonify(result), 404)
     except Exception as e:
-        result = {'error': 'something went wrong'}
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 

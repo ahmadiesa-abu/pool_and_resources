@@ -20,14 +20,16 @@ class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://'+Config.USER_NAME+':'+Config.PASSWORD+'@'+Config.DATABASE_HOST+':'+Config.DATABASE_PORT+'/'+Config.DATABASE_NAME
+    SQLALCHEMY_DATABASE_URI = 'postgresql://'+Config.USER_NAME+':'+Config.PASSWORD + \
+        '@'+Config.DATABASE_HOST+':'+Config.DATABASE_PORT+'/'+Config.DATABASE_NAME
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(Config):
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://'+Config.USER_NAME+':'+Config.PASSWORD+'@'+Config.DATABASE_HOST+':'+Config.DATABASE_PORT+'/'+Config.DATABASE_NAME
+    SQLALCHEMY_DATABASE_URI = 'postgresql://'+Config.USER_NAME+':'+Config.PASSWORD + \
+        '@'+Config.DATABASE_HOST+':'+Config.DATABASE_PORT+'/'+Config.DATABASE_NAME
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -36,10 +38,10 @@ class ProductionConfig(Config):
     DEBUG = False
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
-    SQLALCHEMY_DATABASE_URI = 'postgresql://'+Config.USER_NAME+':'+Config.PASSWORD+'@'+Config.DATABASE_HOST+':'+Config.DATABASE_PORT+'/'+Config.DATABASE_NAME
+    SQLALCHEMY_DATABASE_URI = 'postgresql://'+Config.USER_NAME+':'+Config.PASSWORD + \
+        '@'+Config.DATABASE_HOST+':'+Config.DATABASE_PORT+'/'+Config.DATABASE_NAME
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
 
 
 config_by_name = dict(

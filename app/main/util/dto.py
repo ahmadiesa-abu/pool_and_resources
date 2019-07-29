@@ -8,10 +8,10 @@ class PoolResourceDto:
         'resources': fields.List(fields.String)
     })
 
-    _ResouceId = api.model('Resource', {
+    _ResouceId = api.model('ResourceId', {
         'id': fields.String(required=True, description='resource identifier')
     })
 
-    _ResouceIp = api.model('Resource', {
-        'ip_address': fields.String(required=True, description='resource ip address')
+    _ResouceIp = api.model('ResourceIP', {
+		'ip_address': fields.String(required=True, description='resource ip address')
     })
