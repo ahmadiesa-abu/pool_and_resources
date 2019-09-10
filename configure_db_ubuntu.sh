@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo apt-get update
 sudo apt-get install -y postgresql postgresql-contrib python-pip python-psycopg2 libpq-dev python-dev libxml2-dev libxslt-dev libffi-dev
 update-rc.d postgresql enable
 service postgresql start
