@@ -3,7 +3,7 @@ from flask_restplus import Resource
 
 
 from ..util.dto import PoolResourceDto
-from ..service.resource_service import allocate_resource, release_resource, add_resource, delete_resource_by_id, get_resource_by_id
+from ..service.resource_service import allocate_resource, release_resource, add_resource, delete_resource_by_id, get_resource_by_id, get_first_released_resource_and_allocate_it
 
 api = PoolResourceDto.api
 _ResouceId = PoolResourceDto._ResouceId
@@ -42,3 +42,8 @@ class ResourceList(Resource):
 
     def get(self, id, resource_id):
         return get_resource_by_id(id, resource_id)
+
+@api.route('/api/pools/<string:id>/allocate_first_released')
+class FirstReleasedResourceAllocate(Resource):
+   def put(self, id):
+       return get_first_released_resource_and_allocate_it(id)
