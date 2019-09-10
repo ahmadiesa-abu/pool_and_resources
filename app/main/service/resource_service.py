@@ -89,6 +89,36 @@ def release_resource(id,request):
         result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
         return make_response(jsonify(result),500)
 
+
+def get_first_released_resource_and_allocate_it(id):
+    try:
+        pool = Pool.query.get(id)
+        if not pool:
+            result = {'error': 'Resource is not found'}
+            return make_response(jsonify(result), 404)
+        else:
+            resource_id = ''
+            resources = pool.resources
+            if not resources:
+                result = {'error': 'Release resource was not found'}
+                return make_response(jsonify(result), 404)
+            for resource in resources:
+                if resource.status == 'RELEASED':
+                    resource_id = resource.id
+                    resource.status = 'ALLOCATED'
+                    db.session.commit()
+                    p_resource = {}
+                    p_resource['id'] = resource.id
+                    p_resource['ip_address'] = resource.ip_address
+                    p_resource['status'] = resource.status
+                    return make_response(jsonify(p_resource), 200)
+            if resource_id == '':
+                result = {'error': 'Released resource was not found'}
+                return make_response(jsonify(result), 404)
+    except Exception as e:
+        result = {'error': 'Exception occured : '+getattr(e, 'message', repr(e))}
+        return make_response(jsonify(result),500)
+
 def add_resource(id,request):
     try:
         pool = Pool.query.get(id)
