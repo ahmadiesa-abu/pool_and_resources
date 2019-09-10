@@ -32,7 +32,7 @@ def run():
         if getattr(e, 'message', repr(e)).find('\"pool\" does not exist')!=-1:
             db.create_all()
             db.session.commit()
-    app.run()
+    app.run(host='0.0.0.0')
 
 
 @manager.command
