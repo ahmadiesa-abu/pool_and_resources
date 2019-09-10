@@ -8,8 +8,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
-    USER_NAME = os.getenv('DB_USERNAME', 'postgres')
-    PASSWORD = os.getenv('DB_PASSWORD', 'postgres')
+    USER_NAME = os.getenv('DB_USERNAME', 'pools')
+    PASSWORD = os.getenv('DB_PASSWORD', 'pool1234')
     DATABASE_HOST = os.getenv('DB_HOST', 'localhost')
     DATABASE_PORT = os.getenv('DB_PORT', '5432')
     DATABASE_NAME = os.getenv('DB_NAME', 'pools')
